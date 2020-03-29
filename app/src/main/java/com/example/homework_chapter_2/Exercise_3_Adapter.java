@@ -1,6 +1,7 @@
 package com.example.homework_chapter_2;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.InputStream;
+import java.sql.Time;
 import java.util.List;
 
 public class Exercise_3_Adapter extends RecyclerView.Adapter<Exercise_3_Adapter.NumberViewHolder>{
@@ -35,6 +37,7 @@ public class Exercise_3_Adapter extends RecyclerView.Adapter<Exercise_3_Adapter.
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+
     }
 
     @NonNull
@@ -56,6 +59,7 @@ public class Exercise_3_Adapter extends RecyclerView.Adapter<Exercise_3_Adapter.
     public void onBindViewHolder(@NonNull NumberViewHolder numberViewHolder, int position) {
         Log.d(TAG, "onBindViewHolder: #" + position);
         numberViewHolder.bind(position);
+        numberViewHolder.itemView.setBackgroundColor(Color.rgb(22,25,32));
     }
 
     @Override
@@ -67,17 +71,24 @@ public class Exercise_3_Adapter extends RecyclerView.Adapter<Exercise_3_Adapter.
 
         private final TextView viewHolderIndex;
         private final TextView listItemNumberView;
+        private final TextView TimeView;
 
         public NumberViewHolder(@NonNull View itemView) {
             super(itemView);
             listItemNumberView = (TextView) itemView.findViewById(R.id.tv_item_number);
             viewHolderIndex = (TextView) itemView.findViewById(R.id.tv_content);
+            TimeView = (TextView) itemView.findViewById(R.id.tv_time);
             itemView.setOnClickListener(this);
+            listItemNumberView.setTextColor(Color.rgb(255,255,255));
+            viewHolderIndex.setTextColor(Color.rgb(128,128,128));
+            TimeView.setTextColor(Color.rgb(128,128,128));
+
         }
 
         public void bind(int position) {
-            listItemNumberView.setText(String.valueOf(position));
-            viewHolderIndex.setText(messages.get(position).toString());
+            listItemNumberView.setText(messages.get(position).getTitle());
+            viewHolderIndex.setText(messages.get(position).getHashTag());
+            TimeView.setText(messages.get(position).getTime());
 
         }
 
